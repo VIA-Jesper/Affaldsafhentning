@@ -1,0 +1,10 @@
+{
+  "domain": "affaldshafhentning",
+  "name": "Affaldshafhentning",
+  "documentation": "https://github.com/via-jesper/affaldshafhentning",
+  "dependencies": [],
+  "codeowners": [],
+  "config_flow": true,
+  "iot_class": "local_polling",
+  "version": "1.0.0"
+}
