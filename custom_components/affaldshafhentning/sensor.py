@@ -72,8 +72,15 @@ class AffaldSensor(SensorEntity):
             is_today = self._state == today
             is_tomorrow = self._state == (today + timedelta(days=1))
 
+        human_readable = f"Om {self._days_until} dage"
+        if self._days_until == 0:
+            human_readable = "I dag"
+        elif self._days_until == 1:
+            human_readable = "I morgen"
+
         return {
             "days_until_pickup": self._days_until,
+            "human_readable_next": human_readable,
             "is_today": is_today,
             "is_tomorrow": is_tomorrow,
             "pickup_frequency": self._frequency,

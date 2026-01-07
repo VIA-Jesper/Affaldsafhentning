@@ -5,7 +5,8 @@ En simpel integration til at holde styr på dine skraldetømninger i Danmark. De
 ## Funktioner
 - 📅 Beregner næste tømning ud fra frekvens (f.eks. hver 2. uge).
 - 🖼️ Viser officielle danske affaldspiktogrammer.
-- 🔔 Automatisering klar: Attributter for `is_today` og `is_tomorrow`.
+- �️ Human-friendly: Attributten `human_readable_next` giver tekster som "I morgen" eller "Om 3 dage".
+- �🔔 Automatisering klar: Attributter for `is_today` og `is_tomorrow`.
 - 🛠️ Manuel overstyring af datoer (perfekt til helligdage).
 - 🇩🇰 Dansksproget opsætning.
 
@@ -26,6 +27,19 @@ En simpel integration til at holde styr på dine skraldetømninger i Danmark. De
 1. Gå til **Indstillinger -> Enheder og tjenester**.
 2. Klik på **Tilføj integration** og søg efter **Affaldshafhentning**.
 3. Indtast dine detaljer (Type, dag, uge-interval og startuge).
+
+## Dashboard (Lovlace)
+Da integrationen selv beregner tekster, kan dit dashboard gøres meget simpelt. Her er et eksempel på brug med `entities` kortet:
+
+```yaml
+type: entities
+title: Affald
+entities:
+  - entity: sensor.rest_og_mad
+    name: Rest og Mad
+    type: custom:template-entity-row
+    secondary: "{{ state_attr('sensor.rest_og_mad', 'human_readable_next') }}"
+```
 
 ## Automatisering (Notifikationer)
 Integrationen gør det nemt at få besked, når det er tid til at sætte skraldespanden ud. Hver sensor har attributterne `is_today` og `is_tomorrow`.
@@ -55,19 +69,7 @@ Hvis en afhentning flyttes pga. en helligdag, kan du nemt rette det:
 3. I feltet **Dato-flytninger** skriver du den gamle dato og den nye dato adskilt af kolon.
    - Format: `YYYY-MM-DD:YYYY-MM-DD`
    - Eksempel: `2024-12-24:2024-12-27` (flytter tømning fra juleaften til 27. dec).
-   - Du kan tilføje flere ved at adskille dem med komma: `dato1:dato1_ny, dato2:dato2_ny`.
 
 ## Piktogrammer
-Integrationen kigger efter nøgleord i din "Affaldstype" for at vælge det rigtige billede.
-- **Madaffald**: Indeholder "mad"
-- **Restaffald**: Indeholder "rest"
-- **Plast**: Indeholder "plast"
-- **Papir**: Indeholder "papir"
-- **Pap**: Indeholder "pap"
-- **Metal**: Indeholder "metal"
-- **Glas**: Indeholder "glas"
-- **Tekstil**: Indeholder "tekstil"
-- **Karton**: Indeholder "karton"
-- **Farligt**: Indeholder "farligt"
-- **Hård plast**: Indeholder "hård plast"
-- **Blød plast**: Indeholder "blød plast"
+Integrationen vælger automatisk piktogram baseret på navnet:
+- **Madaffald**, **Restaffald**, **Plast**, **Papir**, **Pap**, **Metal**, **Glas**, **Tekstil**, **Karton**, **Farligt**, **Hård plast**, **Blød plast**.
