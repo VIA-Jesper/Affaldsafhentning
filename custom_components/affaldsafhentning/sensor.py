@@ -1,4 +1,4 @@
-"""Sensor platform for Affaldshafhentning."""
+"""Sensor platform for Affaldsafhentning."""
 from __future__ import annotations
 
 from datetime import datetime, timedelta
@@ -38,7 +38,7 @@ async def async_setup_entry(
     async_add_entities([AffaldSensor(hass, entry)], True)
 
 class AffaldSensor(SensorEntity):
-    """Representation of an Affaldshafhentning sensor."""
+    """Representation of an Affaldsafhentning sensor."""
 
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry) -> None:
         """Initialize the sensor."""
@@ -116,7 +116,7 @@ class AffaldSensor(SensorEntity):
                 image_name = value
                 break
                 
-        return f"/api/affaldshafhentning/icons/{image_name}.jpg"
+        return f"/api/affaldsafhentning/icons/{image_name}.jpg"
 
     def update(self) -> None:
         """Fetch new state data for the sensor."""

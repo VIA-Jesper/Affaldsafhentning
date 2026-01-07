@@ -2,13 +2,13 @@
     "config": {
         "step": {
             "user": {
-                "title": "Konfigurer Affaldshafhentning",
+                "title": "Konfigurer Affaldsafhentning",
                 "description": "Indtast detaljer for din affaldstype.",
                 "data": {
-                    "waste_type": "Affaldstype (f.eks. Rest og Mad)",
+                    "waste_type": "Affaldstype",
                     "pickup_frequency": "Hentes hver x uge",
-                    "pickup_day": "Ugedag for afhentning",
-                    "start_week": "Start uge (referenceuge)"
+                    "pickup_day": "Ugedag",
+                    "start_week": "Start uge"
                 }
             }
         }

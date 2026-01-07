@@ -1,4 +1,4 @@
-"""Config flow for Affaldshafhentning integration."""
+"""Config flow for Affaldsafhentning integration."""
 from __future__ import annotations
 
 import logging
@@ -34,7 +34,7 @@ WEEKDAYS_OPTIONS = {
 }
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Affaldshafhentning."""
+    """Handle a config flow for Affaldsafhentning."""
 
     VERSION = 1
 
@@ -75,7 +75,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
 class OptionsFlowHandler(config_entries.OptionsFlow):
-    """Handle options flow for Affaldshafhentning."""
+    """Handle options flow for Affaldsafhentning."""
 
     def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
         """Initialize options flow."""

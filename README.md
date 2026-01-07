@@ -1,4 +1,4 @@
-# Affaldshafhentning til Home Assistant
+# Affaldsafhentning til Home Assistant
 
 En simpel integration til at holde styr på dine skraldetømninger i Danmark. Denne integration beregner næste afhentningsdato baseret på dine intervaller og referenceuger, og viser pæne piktogrammer fra [affaldspiktogrammer.dk](https://www.affaldspiktogrammer.dk/).
 
@@ -20,12 +20,12 @@ En simpel integration til at holde styr på dine skraldetømninger i Danmark. De
 5. Genstart Home Assistant.
 
 ### Manuel installation
-1. Kopier mappen `custom_components/affaldshafhentning` til din `/config/custom_components/` mappe.
+1. Kopier mappen `custom_components/affaldsafhentning` til din `/config/custom_components/` mappe.
 2. Genstart Home Assistant.
 
 ## Opsætning
 1. Gå til **Indstillinger -> Enheder og tjenester**.
-2. Klik på **Tilføj integration** og søg efter **Affaldshafhentning**.
+2. Klik på **Tilføj integration** og søg efter **affaldsafhentning**.
 3. Indtast dine detaljer (Type, dag, uge-interval og startuge).
 
 ## Dashboard (Lovlace)

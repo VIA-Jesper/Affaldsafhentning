@@ -1,4 +1,4 @@
-"""The Affaldshafhentning integration."""
+"""The Affaldsafhentning integration."""
 from __future__ import annotations
 
 import os
@@ -12,7 +12,7 @@ from .const import DOMAIN
 PLATFORMS: list[Platform] = [Platform.SENSOR]
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Affaldshafhentning from a config entry."""
+    """Set up Affaldsafhentning from a config entry."""
     hass.data.setdefault(DOMAIN, {})
     
     # Register static path for icons if not already done
@@ -21,10 +21,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         if not os.path.exists(icon_path):
             os.makedirs(icon_path)
             
-        hass.http.register_static_path(
-            "/api/affaldshafhentning/icons",
-            icon_path,
-            cache_headers=True
+        await hass.http.async_register_static_paths(
+            [StaticPathConfig("/api/affaldsafhentning/icons", icon_path, cache_headers=True)]
         )
         hass.data[DOMAIN]["static_registered"] = True
 

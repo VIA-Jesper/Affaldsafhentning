@@ -1,6 +1,6 @@
 """Constants for the Affaldshafhentning integration."""
 
-DOMAIN = "affaldshafhentning"
+DOMAIN = "affaldsafhentning"
 
 CONF_PICKUP_DAY = "pickup_day"
 CONF_PICKUP_FREQUENCY = "pickup_frequency"
