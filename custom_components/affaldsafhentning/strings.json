@@ -17,7 +17,7 @@
         "step": {
             "init": {
                 "title": "Indstillinger",
-                "description": "Her kan du overstyre specifikke afhentningsdatoer (f.eks. ved helligdage).",
+                "description": "Her kan du overstyre specifikke afhentningsdatoer. Format: GammelDato:NyDato (ÅÅÅÅ-MM-DD:ÅÅÅÅ-MM-DD). Adskil flere med komma.",
                 "data": {
                     "exceptions": "Dato-flytninger (ÅYYY-MM-DD:ÅYYY-MM-DD)"
                 }

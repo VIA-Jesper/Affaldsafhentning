@@ -44,7 +44,12 @@ class AffaldSensor(SensorEntity):
         """Initialize the sensor."""
         self._hass = hass
         self._entry = entry
-        self._attr_name = entry.data.get(CONF_WASTE_TYPE)
+        
+        # Store raw waste type for logic and attributes
+        self._waste_type = entry.data.get(CONF_WASTE_TYPE)
+        
+        # Prefix the name for easier finding in Home Assistant
+        self._attr_name = f"Affaldsafhentning {self._waste_type}"
         self._attr_unique_id = f"{entry.entry_id}_pickup"
         
         self._pickup_day = entry.data.get(CONF_PICKUP_DAY)
@@ -85,14 +90,14 @@ class AffaldSensor(SensorEntity):
             "is_tomorrow": is_tomorrow,
             "pickup_frequency": self._frequency,
             "pickup_day": self._pickup_day,
-            "collection_of": self._attr_name,
+            "collection_of": self._waste_type,
         }
 
     @property
     def entity_picture(self) -> str | None:
         """Return the entity picture."""
         # Map common waste types to the actual pictogram filenames
-        name = self._attr_name.lower()
+        name = self._waste_type.lower()
         
         mapping = {
             "rest": "restaffald",
@@ -109,14 +114,34 @@ class AffaldSensor(SensorEntity):
             "blød plast": "bloed_plast_2",
         }
         
-        # Try to find a match in the mapping
-        image_name = "restaffald" # Default
+        found_images = []
+        
+        # Iterate through mapping to find all matches
         for key, value in mapping.items():
             if key in name:
-                image_name = value
-                break
-                
-        return f"/api/affaldsafhentning/icons/{image_name}.jpg"
+                # Avoid duplicates (e.g. dont add 'plast' again if 'hård plast' was found)
+                # Simple check: if we have a match, add it.
+                # But 'plast' is inside 'hård plast'. To avoid double match, one could be more clever.
+                # For now, simple set logic or list check.
+                if value not in found_images:
+                    found_images.append(value)
+        
+        # Specific cleanup: if 'haard_plast' or 'bloed_plast_2' is present, remove generic 'plast' if present
+        if "plast" in found_images:
+            if "haard_plast" in found_images or "bloed_plast_2" in found_images:
+                found_images.remove("plast")
+
+        if not found_images:
+             # Default
+            image_name = "restaffald"
+            return f"/api/affaldsafhentning/icons/{image_name}.jpg"
+            
+        if len(found_images) == 1:
+            return f"/api/affaldsafhentning/icons/{found_images[0]}.jpg"
+            
+        # If multiple images, use dynamic API
+        images_str = ",".join(found_images)
+        return f"/api/affaldsafhentning/image?images={images_str}"
 
     def update(self) -> None:
         """Fetch new state data for the sensor."""

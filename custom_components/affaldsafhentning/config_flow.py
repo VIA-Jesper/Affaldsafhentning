@@ -79,7 +79,7 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
 
     def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
         """Initialize options flow."""
-        self.config_entry = config_entry
+        self._config_entry = config_entry
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
@@ -94,7 +94,7 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                 {
                     vol.Optional(
                         CONF_EXCEPTIONS,
-                        default=self.config_entry.options.get(CONF_EXCEPTIONS, ""),
+                        default=self._config_entry.options.get(CONF_EXCEPTIONS, ""),
                     ): str,
                 }
             ),
